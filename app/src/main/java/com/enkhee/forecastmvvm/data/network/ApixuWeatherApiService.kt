@@ -15,9 +15,9 @@ import retrofit2.http.Query
 
 interface ApixuWeatherApiService {
 
-    @GET("current.json")
+    @GET("current")
     fun getCurrentWeather(
-        @Query("q") location:String,
+        @Query("query") location:String,
         @Query("lang") language:String = "en"
     ):Observable<CurrentWeatherResponse>
 
@@ -29,7 +29,7 @@ interface ApixuWeatherApiService {
                 val url = chain.request()
                     .url()
                     .newBuilder()
-                    .addQueryParameter("key", API_KEY)
+                    .addQueryParameter("access_key", API_KEY)
                     .build()
                 val request = chain.request()
                     .newBuilder()
@@ -49,7 +49,7 @@ interface ApixuWeatherApiService {
 
             return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://api.apixu.com/v1/")
+                .baseUrl("http://api.weatherstack.com/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

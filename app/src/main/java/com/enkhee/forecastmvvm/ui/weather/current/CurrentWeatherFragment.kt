@@ -48,20 +48,20 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware, CurrentWeatherCall
             Log.v(LOG_TAG, "weatherObserver: " + it.toString())
             //tv_temperature.text = it.temperature.toString()
         }
-        viewModel.currentWeather.observe(this, weatherObserver)
+        viewModel.currentWeather.observe(viewLifecycleOwner, weatherObserver)
     }
 
     private fun bindUI() = launch {
         val currentWeather = viewModel.weather.await()
         val weatherLocation = viewModel.location.await()
 
-        weatherLocation.observe(this@CurrentWeatherFragment, Observer {
+        weatherLocation.observe(viewLifecycleOwner, Observer {
             if(it == null) return@Observer
             viewModel.weatherLocation.value = it
             updateLocation(it.name)
         })
 
-        currentWeather.observe(this@CurrentWeatherFragment, Observer {
+        currentWeather.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
             viewModel.loadingVisibility.value = View.GONE
             viewModel.currentWeather.value = it

@@ -11,6 +11,6 @@ class UnitProviderImpl(context : Context) : PreferencesProvider(context), UnitPr
 
     override fun getUnitSystem() : UnitSystem {
         val selectedName = preferences.getString(UNIT_SYSTEM, UnitSystem.METRIC.name)
-        return UnitSystem.valueOf(selectedName)
+        return selectedName?.let { UnitSystem.valueOf(selectedName) } ?: UnitSystem.METRIC
     }
 }
