@@ -18,6 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -53,6 +54,9 @@ dependencies {
 
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho-okhttp3:1.5.1"
 
     /*Room*/
     implementation "androidx.room:room-runtime:$room_version"

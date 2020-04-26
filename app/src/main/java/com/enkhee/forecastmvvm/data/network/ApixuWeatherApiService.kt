@@ -2,6 +2,7 @@ package com.enkhee.forecastmvvm.data.network
 
 import com.enkhee.forecastmvvm.data.network.response.CurrentWeatherResponse
 import com.enkhee.forecastmvvm.utils.API_KEY
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Interceptor
@@ -42,6 +43,7 @@ interface ApixuWeatherApiService {
             logging.level = HttpLoggingInterceptor.Level.BODY
 
             val okHttpClient = OkHttpClient.Builder()
+                .addNetworkInterceptor(StethoInterceptor())
                 .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)
                 .addInterceptor(logging)

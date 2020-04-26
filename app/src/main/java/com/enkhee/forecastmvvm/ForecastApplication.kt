@@ -2,7 +2,7 @@ package com.enkhee.forecastmvvm
 
 import android.app.Application
 import android.content.Context
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import com.enkhee.forecastmvvm.data.db.ForecastDatabase
 import com.enkhee.forecastmvvm.data.network.*
 import com.enkhee.forecastmvvm.data.provider.LocationProvider
@@ -12,6 +12,7 @@ import com.enkhee.forecastmvvm.data.provider.UnitProviderImpl
 import com.enkhee.forecastmvvm.data.repository.ForecastRepository
 import com.enkhee.forecastmvvm.data.repository.ForecastRepositoryImpl
 import com.enkhee.forecastmvvm.ui.weather.current.CurrentWeatherViewModelFactory
+import com.facebook.stetho.Stetho
 import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
@@ -38,6 +39,7 @@ class ForecastApplication : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
+        Stetho.initializeWithDefaults(this)
         AndroidThreeTen.init(this)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
     }
